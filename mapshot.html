@@ -1,0 +1,52 @@
+<html ng-app="mapshotApp">
+<head>
+  <title>Mapshot</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <style>
+  </style>
+</head>
+<body ng-controller="mapshotCtrl">
+
+  <div class="container">
+      <h1>Mapshot API Endpoints</h1>
+
+
+
+      <div class="panel panel-info" ng-repeat="endp in endpoints">
+          <div class="panel-heading">
+            <h3 class="panel-title">{{endp.endpoint}}</h3>
+          </div>
+          <div class="panel-body">
+            <h3>Description</h3>
+            <p>{{endp.desc}}</p>
+            <h3>Parameters</h3>
+            <ul>
+              <li ng-repeat="(key, value) in endp.params"><strong>{{key}}</strong> - {{value}}</li>
+            </ul>
+          </div>
+      </div>
+  </div>
+  
+  <script>
+  var mapshotApp = angular.module('mapshotApp', []);
+
+    mapshotApp.controller('mapshotCtrl', function ($scope) {
+      
+      $scope.endpoints = [
+        {
+          'endpoint': '/mapshot/img/:map/:width/:height/:bbox/',
+          'desc': 'Returns an image of a map.',
+          'params': {
+            'map': 'map file for mapnik to use',
+            'width': 'width of the image in px',
+            'height': 'height of the image in px',
+            'bbox': 'bounding box of the map you would like to render'
+          }
+        }
+      ];
+
+    });
+  </script>
+</body>
+</html>
